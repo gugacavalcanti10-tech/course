@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -20,6 +21,8 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment; // momento da compra
 
+    private Integer orderStatus; // tipo de parametro e nome do parametro
+
     @ManyToOne //cardinalidade de muitos para um, "podem ter muitos pedidos por um cliente"
     @JoinColumn(name = "client_id") //define a coluna que armazena a refêrencia ao usuario na tabela de pedidos
     private User client; // "client" faz referencia do objeto "User"
@@ -28,8 +31,10 @@ public class Order implements Serializable {
 
     };
 
-    public Order(Long id, User client, Instant moment) { //construtor com todos os atributos
+    public Order(Long id, OrderStatus orderStatus, User client, Instant moment) { //construtor com todos os atributos
+        super();
         this.id = id;
+        setOrderStatus(orderStatus);
         this.client = client;
         this.moment = moment;
     }
@@ -40,6 +45,17 @@ public class Order implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if(orderStatus != null) {
+
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     public User getClient() {
