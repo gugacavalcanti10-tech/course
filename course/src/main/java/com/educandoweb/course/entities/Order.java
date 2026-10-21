@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,18 +15,20 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // identificador
-    private Instant moment; // usado mais hj em dia do que o Date
+    private Long id; // identificador de compra
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private User client; // nome do papel que ta no diagrama
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    private Instant moment; // momento da compra
 
-    public Order() {
+    @ManyToOne //cardinalidade de muitos para um, "podem ter muitos pedidos por um cliente"
+    @JoinColumn(name = "client_id") //define a coluna que armazena a refêrencia ao usuario na tabela de pedidos
+    private User client; // "client" faz referencia do objeto "User"
+
+    public Order() { //construtor vazio
 
     };
 
-    public Order(Long id, User client, Instant moment) {
+    public Order(Long id, User client, Instant moment) { //construtor com todos os atributos
         this.id = id;
         this.client = client;
         this.moment = moment;
@@ -47,17 +50,30 @@ public class Order implements Serializable {
         this.client = client;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
+    @Override //indica que o metodo está sendo sobreescrito, porque ele ja foi usado na classe "User"
+    public boolean equals(Object o) { // "(Object o)" indica um argumento qualquer como base de comparação
+        if (o == null || getClass() != o.getClass()) return false; //compara o argumento com nulo e se são de classes diferentes
+        Order order = (Order) o; //casting  (conversão de tipo)
         return Objects.equals(getId(), order.getId());
+        /*
+        A classe Objects, do pacote java.util, oferece esse método estático para comparar objetos de forma
+        segura quando algum deles pode ser null.
+         */
     }
+
+    /*
+    metodo equals é usado para identificar se existem dois ou mais objetos da classe que tem elemento igual,
+    nesse caso o ID, porque é o elemento identificado de cada objeto da classe
+     */
 
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());
     }
+    /*
+    É mais um metodo de organização e cotrole com maior eficiencia. A regra é:
+    se eles são iguais pelo "equals()" precisam ter o mesmo "hascode()"
+     */
 
     public Instant getMoment() {
         return moment;

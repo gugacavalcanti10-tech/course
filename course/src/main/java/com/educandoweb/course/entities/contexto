@@ -1,0 +1,21 @@
+No pacote de entidades, a classe Order e User, não são duas coisas isoladas, ela são lados da mesma moeda
+
+
+na classe User:
+
+@OneToMany(mappedBy = "client") -> representa a cardinalidade e com quem faz essa relação
+
+private List<Order> orders = new ArrayList<>(); -> Aqui ta criando uma lista de objeto "Order" e "orders" é
+a forma na qual vai ser chamado a lista de objetos "Order". Portanto "orders" pode conter varios objetos
+"Order" contidos na lista
+
+
+Na classe Order:
+
+@ManyToOne -> Faz referencia a cardinalidade anteriormente dita
+@JoinColumn(name = "client_id") -> Essa anotação define a chave estrangeira do relacionamento no bando
+private User client; -> Significa que cada objeto Order mantém referencia a um objeto de classe User
+
+OBS: a chave estrangeira ficou do lado dos pedidos, porque cada pedido precisa ser identificado
+pelo seu condutor
+OBS 2: a anotação "JoinColumn" representa o lado da moeda responsavel pela chave estrageira
