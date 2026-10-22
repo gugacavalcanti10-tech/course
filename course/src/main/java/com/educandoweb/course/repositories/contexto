@@ -1,0 +1,13 @@
+E o que significa cada coisa?
+
+- JPA: define um padrão para relacionar objetos Java com tabelas do banco de dados.
+
+- Spring Data JPA: facilita o uso desse padrão, oferecendo métodos prontos, como findAll() e save().
+
+- JpaRepository<User, Long>: informa que o repositório trabalha com a entidade User e que seu ID é do tipo Long.
+(EXEMPLO)
+
+
+Resumindo: você adiciona a dependência do Spring Data JPA ao projeto para ter
+acesso a essas funcionalidades, evitando escrever manualmente o código de cada
+operação no banco.

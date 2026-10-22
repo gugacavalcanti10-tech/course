@@ -24,7 +24,7 @@ public class User implements Serializable {
 
 
     @Id // informa ao JPA que o ID é a chave primaria da entidade
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //valor gerado automaticamente
     /*
     uma anotação para deteminar como será gerado a
     chave primaria, que nesse caso será auto incrementavel, fica por conta do banci

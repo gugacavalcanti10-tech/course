@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; //valor gerado automaticamente
 
 
     @Id
