@@ -2,6 +2,7 @@ package com.educandoweb.course.entities;
 
 import jakarta.persistence.*;
 
+import jakarta.persistence.ManyToMany;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,8 +20,9 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient // usado para o atributo passar em branco pelo JPA(não serr mapeado)
-    private Set<Category> categries = new HashSet<>(); //representa connjunto
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>(); //representa connjunto
 
     public Product() {
     }
@@ -42,7 +44,7 @@ public class Product implements Serializable {
     }
 
     public Set<Category> getCategries() {
-        return categries;
+        return categories;
     }
 
     public String getImgUrl() {
