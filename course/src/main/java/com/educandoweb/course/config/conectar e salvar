@@ -1,0 +1,28 @@
+Existe uma diferença entre conectar os objetos enntre si no banco de dados e salvar eles.
+
+por exemplo: "p1.getCategries().add(cat2);"
+
+significa que eu to adicionando a categoria 2 sobre a lista de categorias do produto p1,,
+em outras palavras, ele ainda poderia ter mais de uma categoria para definir esse mesmo produto.
+
+Mas ao mesmo tempo que eu faço isso, eu não estou salvando o objeto de maneira resistida denntro do banco de dados
+
+essa linha: categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+Diz que esta organizando em uma lista os elementos de categoria e salvando no repositorio de categoria
+
+essa linha: productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+Essa linha diz a mesma coisa, so que está se referindo aos produtos que serão organizado em forma de lista
+e guardados no repositorio de sua mesma classe.
+
+
+
+
+Então qual a ordem correta a se seguir e evitar gerar relacionamento entre objetos de classes
+diferentes sem mesmo ter salvo eles?
+
+1-) SALVAR AS CATEGORIAS PARA ELAS PASSAREM A EXISTIR DENTRO DO BANCO DE DADOS
+2-) CONECTAR AS CATEGORIAS AOS PRODUTOS POSTERIORMENTE
+3-) SALVAR OS PRODUTOS (o JPA pode persistir os produtos e as relações configuradas)
+
+OBS: a ordem dos dois primeiros passos pode ser invertidas por tanto que em algum momennto elas sejam sim salvas
+no banco de dados
