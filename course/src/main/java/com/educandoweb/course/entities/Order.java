@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -26,6 +28,14 @@ public class Order implements Serializable {
     @ManyToOne //cardinalidade de muitos para um, "podem ter muitos pedidos por um cliente"
     @JoinColumn(name = "client_id") //define a coluna que armazena a refêrencia ao usuario na tabela de pedidos
     private User client; // "client" faz referencia do objeto "User"
+
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
+    /*
+    Isso daqui e para representar que a entidade pedido pode ter varios itens conntidos nela
+
+     */
 
     public Order() { //construtor vazio
 
@@ -81,6 +91,10 @@ public class Order implements Serializable {
     metodo equals é usado para identificar se existem dois ou mais objetos da classe que tem elemento igual,
     nesse caso o ID, porque é o elemento identificado de cada objeto da classe
      */
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
 
     @Override
     public int hashCode() {

@@ -13,7 +13,6 @@ import java.util.Objects;
 Essa anotação determina que a classe pode ser incomporada a outra entidade
 como parte dela, mas não determina sozinha
 
-
  */
 @Embeddable
 public class OrderItemPK implements Serializable {

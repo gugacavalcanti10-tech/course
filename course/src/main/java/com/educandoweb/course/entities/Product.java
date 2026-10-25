@@ -27,6 +27,9 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>(); //???????
+
     public Product(Long id, String imgUrl, String name, Double price) {
         this.id = id;
         this.imgUrl = imgUrl;
@@ -64,6 +67,14 @@ public class Product implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(getId(), product.getId());
+    }
+
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
