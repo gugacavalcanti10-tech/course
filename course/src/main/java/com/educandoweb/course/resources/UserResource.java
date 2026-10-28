@@ -1,4 +1,4 @@
-package resource;
+package com.educandoweb.course.resources;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.services.UserService;
@@ -28,9 +28,7 @@ import java.util.List;
     }
     @GetMapping(value = "/{id}") // isso vai indicar que a requisição vai aceitar um ID
      public ResponseEntity<User> findById(@PathVariable Long id) {
-            User obj = service.findById(id); //o "findById" vai receber o parametro de ID, entregue ao GetMapping
-            return  ResponseEntity.ok().body(obj); // para indicar que houve sucesso na resposta
-        //o "(obj)" é o corpo da reposição
+            return ResponseEntity.of(service.findById(id));
 
             /*
             ResponseEntity - representa uma completa a requisição
