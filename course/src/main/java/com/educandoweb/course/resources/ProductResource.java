@@ -1,4 +1,4 @@
-package resource;
+package com.educandoweb.course.resources;
 
 import java.util.List;
 
@@ -40,9 +40,6 @@ public class ProductResource {
 
         // Recebe o ID da URL e solicita ao Service a busca
         // do produto correspondente.
-        Product obj = service.findById(id);
-
-        // Retorna HTTP 200 (OK), contendo o produto encontrado.
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.of(service.findById(id));
     }
 }

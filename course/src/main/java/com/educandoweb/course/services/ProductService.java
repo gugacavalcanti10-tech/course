@@ -4,10 +4,12 @@ import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductService {
 
     @Autowired
@@ -17,8 +19,7 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Product findById(Long id) { //é um metodo usado para encontrar o ID
-        Optional<Product> obj = repository.findById(id); // mostra que pode ser um metodo que pode não ter retorno
-        return obj.get(); // quando é "200" ele retorna ao ID do objeto
+    public Optional<Product> findById(Long id) {
+        return repository.findById(id);
     }
 }

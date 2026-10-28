@@ -1,4 +1,4 @@
-package resource;
+package com.educandoweb.course.resources;
 
 
 import com.educandoweb.course.entities.Order;
@@ -40,10 +40,7 @@ public class OrderResource {
 
         // Recebe o ID informado na URL e solicita ao Service
         // a busca do pedido correspondente.
-        Order obj = service.findById(id);
-
-        // Retorna HTTP 200 (OK), contendo o pedido encontrado.
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.of(service.findById(id));
     }
 }
 

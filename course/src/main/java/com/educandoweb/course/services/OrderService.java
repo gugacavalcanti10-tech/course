@@ -18,9 +18,8 @@ public class OrderService {
     }
 
 
-    public Order findById(Long id) { //é um metodo usado para encontrar o ID
-        Optional<Order> obj = repository.findById(id); // mostra que pode ser um metodo que pode não ter retorno
-        return obj.get(); // quando é "200" ele retorna ao ID do objeto
+    public Optional<Order> findById(Long id) {
+        return repository.findById(id);
 
     }
 }

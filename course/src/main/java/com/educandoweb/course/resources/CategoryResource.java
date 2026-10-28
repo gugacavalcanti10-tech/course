@@ -1,4 +1,4 @@
-package resource;
+package com.educandoweb.course.resources;
 
 
 import java.util.List;
@@ -41,9 +41,6 @@ public class CategoryResource {
 
         // Recebe o ID da URL e solicita ao Service a busca
         // da categoria correspondente.
-        Category obj = service.findById(id);
-
-        // Retorna HTTP 200 (OK), contendo a categoria encontrada.
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.of(service.findById(id));
     }
 }
