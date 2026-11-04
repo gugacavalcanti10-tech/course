@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import jakarta.persistence.ManyToMany;
@@ -69,6 +70,7 @@ public class Product implements Serializable {
         return Objects.equals(getId(), product.getId());
     }
 
+    @JsonIgnore
     public Set<Order> getOrders() {
         Set<Order> set = new HashSet<>();
         for (OrderItem x : items) {
