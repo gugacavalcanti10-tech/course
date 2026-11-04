@@ -26,4 +26,10 @@ public class UserService  {
         return repository.findById(id);
 
     }
+    public User insert(User obj) {
+        return repository.save(obj);
+    }
+    /*
+    tem como objetivo receber um objeto User, salva-lo nno bannco de dados e retornar o usuario salvo
+     */
 }
