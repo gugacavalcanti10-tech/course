@@ -42,7 +42,9 @@ public class Order implements Serializable {
 
     public Order() { //construtor vazio
 
-    };
+    }
+
+    ;
 
     public Order(Long id, OrderStatus orderStatus, User client, Instant moment) { //construtor com todos os atributos
         super();
@@ -65,7 +67,7 @@ public class Order implements Serializable {
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
-        if(orderStatus != null) {
+        if (orderStatus != null) {
 
             this.orderStatus = orderStatus.getCode();
         }
@@ -78,7 +80,7 @@ public class Order implements Serializable {
     public void setClient(User client) {
         this.client = client;
     }
-    
+
     /*
     1- SIGNIFICADO DE CASCADE: permite operações de uma entidade sejam propagadas em outra entidade dependente,
     de maneira automatica. Nesse caso, ao salvar um objeto Order, ele salva seu pagamento junto, porque é algo associado.
@@ -96,7 +98,8 @@ public class Order implements Serializable {
 
     @Override //indica que o metodo está sendo sobreescrito, porque ele ja foi usado na classe "User"
     public boolean equals(Object o) { // "(Object o)" indica um argumento qualquer como base de comparação
-        if (o == null || getClass() != o.getClass()) return false; //compara o argumento com nulo e se são de classes diferentes
+        if (o == null || getClass() != o.getClass())
+            return false; //compara o argumento com nulo e se são de classes diferentes
         Order order = (Order) o; //casting  (conversão de tipo)
         return Objects.equals(getId(), order.getId());
         /*
@@ -114,6 +117,13 @@ public class Order implements Serializable {
         return items;
     }
 
+    public Double getTotal() {
+        double sum = 0.0; // recebe zero porque será responsavel por acumular o valor do pedido total
+        for (OrderItem x : items) { // usado para percorrer coleções
+            sum = sum + x.getSubtotal(); // X representa o objeto de OrderItem a ser somado, e chama o metodo subtotal do item
+        }
+        return sum;
+    }
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());
