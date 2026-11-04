@@ -32,4 +32,8 @@ public class UserService  {
     /*
     tem como objetivo receber um objeto User, salva-lo nno bannco de dados e retornar o usuario salvo
      */
+
+    public void delete(Long id) {
+    repository.deleteById(id);
+    }
 }
