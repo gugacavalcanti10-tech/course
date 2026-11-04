@@ -37,6 +37,9 @@ public class Order implements Serializable {
 
      */
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Order() { //construtor vazio
 
     };
@@ -74,6 +77,21 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+    
+    /*
+    1- SIGNIFICADO DE CASCADE: permite operações de uma entidade sejam propagadas em outra entidade dependente,
+    de maneira automatica. Nesse caso, ao salvar um objeto Order, ele salva seu pagamento junto, porque é algo associado.
+
+    2- DIFERENÇA DE AUTOWIRED: ela fornece o objeto da entidade que foi adicionada a innjeção de depencia, mas não automatiza
+    as ações de CRUD feitas em uma para a outra, apenas gera a dependencia entre os objetos de classes
+     */
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override //indica que o metodo está sendo sobreescrito, porque ele ja foi usado na classe "User"
