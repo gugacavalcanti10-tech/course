@@ -28,7 +28,8 @@ import java.util.List;
 
         @GetMapping(value = "/{id}") // isso vai indicar que a requisição vai aceitar um ID
         public ResponseEntity<User> findById(@PathVariable Long id) {
-            return ResponseEntity.of(service.findById(id));
+            User obj = service.findById(id);
+            return ResponseEntity.ok().body(obj);
             /*
             ResponseEntity - representa uma completa a requisição
 
