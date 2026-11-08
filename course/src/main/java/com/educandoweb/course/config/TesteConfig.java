@@ -51,11 +51,11 @@ public class TesteConfig implements CommandLineRunner {
         Category cat3 = new Category(null, "Computers");
 
         // 2. Criação dos produtos
-        Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5);
-        Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0);
-        Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0);
-        Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0);
-        Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99);
+        Product p1 = new Product(null, "Lorem ipsum dolor sit amet, consectetur.", "The Lord of the Rings", 90.5);
+        Product p2 = new Product(null, "Nulla eu imperdiet purus. Maecenas ante.", "Smart TV", 2190.0);
+        Product p3 = new Product(null, "Nam eleifend maximus tortor, at mollis.", "Macbook Pro", 1250.0);
+        Product p4 = new Product(null, "Donec aliquet odio ac rhoncus cursus.", "PC Gamer", 1200.0);
+        Product p5 = new Product(null, "Cras fringilla convallis sem vel faucibus.", "Rails for Dummies", 100.99);
 
         // 3. Criação dos usuários
         User u1 = new User("546389", "maria@gmail.com", "maria fulana", "123456");
