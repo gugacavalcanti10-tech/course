@@ -2,6 +2,7 @@ package com.educandoweb.course.resources;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ import java.util.List;
         }
 
         @PostMapping
-        public ResponseEntity<User> Insert(@RequestBody User obj) {
+        public ResponseEntity<User> Insert(@Valid @RequestBody User obj) {
             obj = service.insert(obj);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -60,7 +61,7 @@ import java.util.List;
         }
 
         @PutMapping(value = "/{id}")
-        public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+        public ResponseEntity<User> update(@PathVariable Long id, @Valid @RequestBody User obj) {
             obj = service.update(id, obj);
             return ResponseEntity.ok().body(obj);
         }

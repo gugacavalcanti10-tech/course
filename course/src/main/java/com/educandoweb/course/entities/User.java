@@ -2,6 +2,10 @@ package com.educandoweb.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 import java.io.Serializable;
@@ -31,9 +35,26 @@ public class User implements Serializable {
     */
 
     private Long id;
+    @NotBlank(message = "O nome é obrigatório.")
+    @Column(nullable = false)
     private String name;
+
+    @NotBlank(message = "O e-mail é obrigatório.")
+    @Email(message = "Informe um e-mail válido, como nome@exemplo.com.")
+    @Column(nullable = false)
     private String email;
+
+    @NotBlank(message = "O telefone é obrigatório.")
+    @Pattern(regexp = "^(?:[1-9][0-9]|\\([1-9][0-9]\\)) ?[0-9]{4,5}-?[0-9]{4}$",
+            message = "Informe um telefone com DDD de 2 dígitos e número de 8 ou 9 dígitos, como (11) 3333-4444 ou (11) 99999-9999.")
+    @Column(nullable = false)
     private String phone;
+
+    @NotBlank(message = "A senha é obrigatória.")
+    @Size(min = 10, message = "A senha deve ter pelo menos 10 caracteres.")
+    @Pattern(regexp = "(?s)^(?=.*\\p{Lu})(?=.*[0-9])(?=.*[^\\p{L}\\p{N}\\s]).*$",
+            message = "A senha deve conter pelo menos uma letra maiúscula, um caractere especial e um número.")
+    @Column(nullable = false)
     private String password;
 
     @JsonIgnore

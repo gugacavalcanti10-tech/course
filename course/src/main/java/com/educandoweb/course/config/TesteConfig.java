@@ -58,8 +58,8 @@ public class TesteConfig implements CommandLineRunner {
         Product p5 = new Product(null, "Cras fringilla convallis sem vel faucibus.", "Rails for Dummies", 100.99);
 
         // 3. Criação dos usuários
-        User u1 = new User("546389", "maria@gmail.com", "maria fulana", "123456");
-        User u2 = new User("546378", "AlexGreen@gmail.com", "Alex Green", "123456");
+        User u1 = new User("(11) 99999-6389", "maria@gmail.com", "maria fulana", "Maria@12345");
+        User u2 = new User("(21) 3333-6378", "AlexGreen@gmail.com", "Alex Green", "Alex@12345!");
 
         // 4. Criação dos pedidos
         Order o1 = new Order(null, OrderStatus.PAID, u1, Instant.parse("2019-06-20T19:53:07Z"));

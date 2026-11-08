@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.Instant;
 
@@ -14,6 +15,16 @@ import java.time.Instant;
 interceptar em situações de erro
 */
 public class ResourceExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+        String message = e.getBindingResult().getFieldErrors().stream()
+                .map(field -> field.getField() + ": " + field.getDefaultMessage())
+                .distinct()
+                .collect(java.util.stream.Collectors.joining(" "));
+        StandardError err = new StandardError(Instant.now(), 400, "Erro de validação", message, request.getRequestURI());
+        return ResponseEntity.badRequest().body(err);
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
