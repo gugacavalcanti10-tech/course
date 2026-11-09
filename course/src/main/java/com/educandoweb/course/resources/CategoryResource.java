@@ -41,6 +41,6 @@ public class CategoryResource {
 
         // Recebe o ID da URL e solicita ao Service a busca
         // da categoria correspondente.
-        return ResponseEntity.of(service.findById(id));
+        return ResponseEntity.ok().body(service.findById(id));
     }
 }

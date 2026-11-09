@@ -40,7 +40,7 @@ public class OrderResource {
 
         // Recebe o ID informado na URL e solicita ao Service
         // a busca do pedido correspondente.
-        return ResponseEntity.of(service.findById(id));
+        return ResponseEntity.ok().body(service.findById(id));
     }
 }
 

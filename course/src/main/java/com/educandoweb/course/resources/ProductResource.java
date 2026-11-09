@@ -40,6 +40,6 @@ public class ProductResource {
 
         // Recebe o ID da URL e solicita ao Service a busca
         // do produto correspondente.
-        return ResponseEntity.of(service.findById(id));
+        return ResponseEntity.ok().body(service.findById(id));
     }
 }
