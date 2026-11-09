@@ -4,11 +4,10 @@ import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
 import com.educandoweb.course.services.exceptions.DataBaseException;
 import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,24 +37,22 @@ public class UserService  {
     tem como objetivo receber um objeto User, salva-lo nno bannco de dados e retornar o usuario salvo
      */
 
+    @Transactional
     public void delete(Long id) {
+        User entity = findById(id);
         try {
-            repository.deleteById(id);
-        } catch(EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
+            repository.delete(entity);
+            repository.flush();
         } catch (DataIntegrityViolationException e) {
-           throw new DataBaseException(e.getMessage());
+            throw new DataBaseException("Não é possível excluir o usuário porque existem registros vinculados a ele.");
         }
     }
 
+    @Transactional
     public User update(Long id, User obj){
-        try {
-            User entity = repository.getReferenceById(id);
-            updateData(entity, obj);
-            return repository.save(entity);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
-        }
+        User entity = findById(id);
+        updateData(entity, obj);
+        return repository.save(entity);
     }
 
     private void updateData(User entity, User obj) {
